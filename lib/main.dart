@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
             colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
                 .copyWith(secondary: Colors.amber)),
-        home: PlacesListScreen(),
+        home: const PlacesListScreen(),
         routes: {
-          AddPlaceScreen.routeName: (ctx) => AddPlaceScreen(),
+          AddPlaceScreen.routeName: (ctx) => const AddPlaceScreen(),
         },
       ),
     );

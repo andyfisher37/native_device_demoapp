@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class PlaceLocation {
@@ -8,7 +5,7 @@ class PlaceLocation {
   final double? longitude;
   final String? address;
 
-  PlaceLocation(this.latitude, this.longitude, this.address);
+  const PlaceLocation(this.latitude, this.longitude, this.address);
 }
 
 class Place {

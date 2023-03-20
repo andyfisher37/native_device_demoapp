@@ -10,7 +10,7 @@ class LocationHelper {
   }
 
   // Function for get place addres with OSM geocoder
-  Future<String> getPlaceAddress(double lat, double lon) async {
+  static Future<String> getPlaceAddress(double lat, double lon) async {
     final Place result = await Nominatim.reverseSearch(
       lat: lat,
       lon: lon,
@@ -18,8 +18,7 @@ class LocationHelper {
       extraTags: true,
       nameDetails: true,
     );
-    final String address = json.decode(result.displayName);
-    print(address);
-    return address;
+    print('PLACE: ${result.displayName}');
+    return result.displayName;
   }
 }

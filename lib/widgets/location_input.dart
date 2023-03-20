@@ -5,7 +5,9 @@ import 'package:native_device_demoapp/helpers/location_helper.dart';
 import 'package:native_device_demoapp/screens/map_screen.dart';
 
 class LocationInput extends StatefulWidget {
-  const LocationInput({super.key});
+  Function onSelectPlace;
+
+  LocationInput(this.onSelectPlace, {super.key});
 
   @override
   State<LocationInput> createState() => _LocationInputState();
@@ -23,6 +25,7 @@ class _LocationInputState extends State<LocationInput> {
     setState(() {
       _previewImageUrl = location;
     });
+    widget.onSelectPlace(locData.latitude, locData.longitude);
   }
 
   // Function for dynamic select position on map widget MapScreen
@@ -36,7 +39,7 @@ class _LocationInputState extends State<LocationInput> {
     if (selectedLocation == null) {
       return;
     }
-    //..
+    widget.onSelectPlace(selectedLocation.latitude, selectedLocation.longitude);
   }
 
   @override

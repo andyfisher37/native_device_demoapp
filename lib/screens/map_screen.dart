@@ -9,7 +9,8 @@ class MapScreen extends StatefulWidget {
 
   const MapScreen(
       {super.key,
-      this.initLocation = const PlaceLocation(31.777627, 35.204960, null),
+      this.initLocation = const PlaceLocation(
+          latitude: 31.777627, longitude: 35.204960, address: ''),
       this.isSelecting = false});
 
   @override
@@ -40,7 +41,7 @@ class _MapScreenState extends State<MapScreen> {
                 onPressed: _pickedLocation == null
                     ? null
                     : () {
-                        LocationHelper().getPlaceAddress(
+                        LocationHelper.getPlaceAddress(
                             _pickedLocation!.latitude,
                             _pickedLocation!.longitude);
                         Navigator.of(context).pop();

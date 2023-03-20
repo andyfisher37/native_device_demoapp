@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:native_device_demoapp/models/place.dart';
 import 'package:native_device_demoapp/providers/great_places.dart';
 import 'package:native_device_demoapp/widgets/image_input.dart';
 import 'package:native_device_demoapp/widgets/location_input.dart';
@@ -18,21 +19,30 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
   final _titleController = TextEditingController();
 
   XFile? _pickedImage;
+  late PlaceLocation _pickedLocation;
 
   // Select image function
   void _selectImage(XFile pickedImage) {
     _pickedImage = pickedImage;
   }
 
+  // Select place from map
+  void _selectPlace(double latitude, double longitude) {
+    _pickedLocation =
+        PlaceLocation(latitude: latitude, longitude: longitude, address: '');
+  }
+
   // Save place function
   void _savePlace() {
-    if (_titleController.text.isEmpty || _pickedImage == null) {
+    if (_titleController.text.isEmpty ||
+        _pickedImage == null ||
+        _pickedLocation == null) {
       // no data for place...
       print('no data for place...');
       return;
     }
     Provider.of<GreatPlaces>(context, listen: false)
-        .addPlace(_titleController.text, _pickedImage!);
+        .addPlace(_titleController.text, _pickedImage!, _pickedLocation);
     Navigator.of(context).pop();
   }
 
@@ -58,7 +68,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                   const SizedBox(height: 10),
                   ImageInput(_selectImage),
                   const SizedBox(height: 10),
-                  const LocationInput(),
+                  LocationInput(_selectPlace),
                 ],
               ),
             ),
